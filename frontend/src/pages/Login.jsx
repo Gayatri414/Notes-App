@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // ✅ if using React Router
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/ContextProvider"; // ✅ correct import
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+
+  const navigate = useNavigate();
+  const { login } = useAuth(); // ✅ now defined properly
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +19,13 @@ const Login = () => {
         email,
         password,
       });
-      console.log(response.data);
+
+      if (response.data.success) {
+        login(response.data.user);
+        localStorage.setItem("token", response.data.token);
+        navigate("/");
+      }
+
       setSuccess("✅ Login successful!");
       setErrorMsg("");
       setEmail("");
@@ -30,9 +40,7 @@ const Login = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="border shadow-lg p-8 w-96 bg-white rounded-2xl">
-        <h2 className="text-3xl font-bold mb-6 text-center text-teal-700">
-          Login
-        </h2>
+        <h2 className="text-3xl font-bold mb-6 text-center text-teal-700">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block text-gray-700 mb-1">Email</label>
