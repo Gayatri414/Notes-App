@@ -23,7 +23,7 @@ const NoteCard = ({ note, onEdit, deleteNote }) => {
 
         <button
           className="text-red-500 hover:text-red-600"
-          onClick={() => deleteNote(note._id)} // ✅ Uses prop passed from Home
+          onClick={() => deleteNote(note._id)} //  Uses prop passed from Home
         >
           <FaTrash />
         </button>

@@ -9,17 +9,17 @@ const Home = () => {
   const [notes, setNotes] = useState([]);
   const [currentNote, setCurrentNote] = useState(null);
 
-  // ✅ Fetch notes when component loads
+  //  Fetch notes when component loads
   useEffect(() => {
     fetchNotes();
   }, []);
 
-  // ✅ Fetch all notes for logged-in user
+  //  Fetch all notes for logged-in user
   const fetchNotes = async () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        console.warn("⚠️ No token found — please login first");
+        console.warn(" No token found — please login first");
         return;
       }
 
@@ -35,7 +35,7 @@ const Home = () => {
       if (Array.isArray(data.notes)) {
         setNotes(data.notes);
       } else {
-        console.error("❌ data.notes is not an array:", data.notes);
+        console.error(" data.notes is not an array:", data.notes);
         setNotes([]);
       }
     } catch (error) {
@@ -43,24 +43,24 @@ const Home = () => {
     }
   };
 
-  // ✅ Close modal and reset current note
+  // Close modal and reset current note
   const closeModal = () => {
     setCurrentNote(null);
     setModalOpen(false);
   };
 
-  // ✅ Open modal for editing
+  //  Open modal for editing
   const onEdit = (note) => {
     setCurrentNote(note);
     setModalOpen(true);
   };
 
-  // ✅ Add a new note
+  //  Add a new note
   const addNote = async (title, description) => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        alert("⚠️ Please log in before adding a note");
+        alert(" Please log in before adding a note");
         return;
       }
 
@@ -75,30 +75,30 @@ const Home = () => {
         }
       );
 
-      console.log("🟢 Add note response:", data);
+      console.log(" Add note response:", data);
 
       if (data.success) {
         await fetchNotes();
         closeModal();
       } else {
-        alert("❌ Failed to add note: " + (data.message || "Unknown error"));
+        alert(" Failed to add note: " + (data.message || "Unknown error"));
       }
     } catch (error) {
-      console.error("🔴 Error adding note:", error.response?.data || error);
+      console.error("Error adding note:", error.response?.data || error);
       alert("Error adding note. Check console for details.");
     }
   };
 
-  // ✅ Edit an existing note
+  // Edit an existing note
   const editNote = async (id, title, description) => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        alert("⚠️ Please log in before editing a note");
+        alert(" Please log in before editing a note");
         return;
       }
 
-      console.log("🟡 Updating note:", { id, title, description });
+      console.log(" Updating note:", { id, title, description });
 
       const { data } = await axios.put(
         `http://localhost:5000/api/note/${id}`,
@@ -111,34 +111,34 @@ const Home = () => {
         }
       );
 
-      console.log("🟢 Update note response:", data);
+      console.log(" Update note response:", data);
 
       if (data.success) {
         await fetchNotes();
         closeModal();
       } else {
-        alert("❌ Failed to update note: " + (data.message || "Unknown error"));
+        alert(" Failed to update note: " + (data.message || "Unknown error"));
       }
     } catch (error) {
-      console.error("🔴 Error updating note:", error.response?.data || error);
+      console.error(" Error updating note:", error.response?.data || error);
       alert("Error updating note. Check console for details.");
     }
   };
 
-  // ✅ Delete a note
+  //  Delete a note
   const deleteNote = async (id) => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        alert("⚠️ Please log in before deleting a note");
+        alert(" Please log in before deleting a note");
         return;
       }
 
-      if (!window.confirm("🗑️ Are you sure you want to delete this note?")) {
+      if (!window.confirm(" Are you sure you want to delete this note?")) {
         return;
       }
 
-      console.log("🗑️ Deleting note:", id);
+      console.log(" Deleting note:", id);
 
       const { data } = await axios.delete(
         `http://localhost:5000/api/note/${id}`,
@@ -149,15 +149,15 @@ const Home = () => {
         }
       );
 
-      console.log("✅ Delete response:", data);
+      console.log(" Delete response:", data);
 
       if (data.success) {
         await fetchNotes();
       } else {
-        alert("❌ Failed to delete note: " + (data.message || "Unknown error"));
+        alert(" Failed to delete note: " + (data.message || "Unknown error"));
       }
     } catch (error) {
-      console.error("🔴 Error deleting note:", error.response?.data || error);
+      console.error(" Error deleting note:", error.response?.data || error);
       alert("Error deleting note. Check console for details.");
     }
   };
@@ -166,7 +166,7 @@ const Home = () => {
     <div className="bg-gray-100 min-h-screen">
       <Navbar />
 
-      {/* ✅ Notes grid */}
+      {/*  Notes grid */}
       <div className="px-8 pt-4 grid grid-cols-1 md:grid-cols-3 gap-6">
         {notes.length > 0 ? (
           notes.map((note) => (
@@ -174,7 +174,7 @@ const Home = () => {
               key={note._id}
               note={note}
               onEdit={onEdit}
-              deleteNote={deleteNote} // ✅ Pass deleteNote here!
+              deleteNote={deleteNote} //  Pass deleteNote here!
             />
           ))
         ) : (
@@ -184,7 +184,7 @@ const Home = () => {
         )}
       </div>
 
-      {/* ✅ Add note button */}
+      {/*  Add note button */}
       <button
         onClick={() => setModalOpen(true)}
         className="fixed right-4 bottom-4 bg-teal-500 hover:bg-teal-600 text-white text-2xl font-bold p-4 rounded-full shadow-lg transition-transform transform hover:scale-105"
@@ -192,7 +192,7 @@ const Home = () => {
         + Add Note
       </button>
 
-      {/* ✅ Modal (for add/edit) */}
+      {/* Modal (for add/edit) */}
       {isModalOpen && (
         <NoteModal
           closeModal={closeModal}

@@ -4,7 +4,7 @@ const NoteModal = ({ closeModal, addNote, editNote, currentNote }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  // ✅ Pre-fill fields when editing
+  // Pre-fill fields when editing
   useEffect(() => {
     if (currentNote) {
       setTitle(currentNote.title || "");
@@ -24,11 +24,11 @@ const NoteModal = ({ closeModal, addNote, editNote, currentNote }) => {
     }
 
     if (currentNote) {
-      console.log("✏️ Editing note:", currentNote._id);
+      console.log(" Editing note:", currentNote._id);
       await editNote(currentNote._id, title, description);
     } else {
-      console.log("🟢 Adding new note");
-      await addNote(title, description); // ✅ this must exist
+      console.log(" Adding new note");
+      await addNote(title, description); //  this must exist
     }
   };
 
