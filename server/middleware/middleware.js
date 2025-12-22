@@ -13,7 +13,7 @@ const middleware = async (req, res, next) => {
     const token = authHeader.split(" ")[1];
 
     // Verify token
-    const decoded = jwt.verify(token, "secretkeyofnoteapp123@#"); // ✅ must match auth.js
+    const decoded = jwt.verify(token, "secretkeyofnoteapp123@#"); //  must match auth.js
 
     // Find user by decoded.id (not decoded._id)
     const user = await User.findById(decoded.id);
@@ -27,7 +27,7 @@ const middleware = async (req, res, next) => {
     // Move to next route
     next();
   } catch (error) {
-    console.error("❌ Middleware error:", error.message);
+    console.error(" Middleware error:", error.message);
     return res.status(401).json({ success: false, message: "Invalid or expired token" });
   }
 };

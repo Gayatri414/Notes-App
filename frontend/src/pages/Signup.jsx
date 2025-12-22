@@ -24,7 +24,7 @@ const Signup = () => {
       });
       
       console.log(response.data);
-      setSuccess("✅ Signup successful! Redirecting...");
+      setSuccess(" Signup successful! Redirecting...");
       setName("");
       setEmail("");
       setPassword("");
@@ -33,7 +33,7 @@ const Signup = () => {
     } catch (error) {
       console.error(error);
       // Use optional chaining for safer access to nested properties
-      setErrorMsg(error.response?.data?.message || "❌ Signup failed! Please try again.");
+      setErrorMsg(error.response?.data?.message || " Signup failed! Please try again.");
       
     } finally {
       setLoading(false); // Stop loading regardless of success or failure

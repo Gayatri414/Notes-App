@@ -5,9 +5,8 @@ import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
-// ----------------------
+
 // REGISTER USER
-// ----------------------
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -29,16 +28,16 @@ router.post("/register", async (req, res) => {
       .status(200)
       .json({ success: true, message: "Account created successfully" });
   } catch (error) {
-    console.error("❌ Error in /register:", error);
+    console.error(" Error in /register:", error);
     res
       .status(500)
       .json({ success: false, message: "Internal Server Error" });
   }
 });
 
-// ----------------------
+
 // LOGIN USER
-// ----------------------
+
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -62,7 +61,7 @@ router.post("/login", async (req, res) => {
     // Generate JWT token
     const token = jwt.sign(
       { id: user._id },
-      "secretkeyofnoteapp123@#", // 👉 move to .env later
+      "secretkeyofnoteapp123@#", //  move to .env later
       { expiresIn: "5h" }
     );
 
@@ -73,7 +72,7 @@ router.post("/login", async (req, res) => {
       message: "Login successful",
     });
   } catch (error) {
-    console.error("❌ Error in /login:", error);
+    console.error(" Error in /login:", error);
     return res
       .status(500)
       .json({ success: false, message: "Error in Login Server" });

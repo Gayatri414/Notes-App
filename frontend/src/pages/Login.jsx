@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/ContextProvider"; // ✅ correct import
+import { useAuth } from "../context/ContextProvider"; //  correct import
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +10,7 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const navigate = useNavigate();
-  const { login } = useAuth(); // ✅ now defined properly
+  const { login } = useAuth(); //  now defined properly
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,13 +26,13 @@ const Login = () => {
         navigate("/");
       }
 
-      setSuccess("✅ Login successful!");
+      setSuccess("Login successful!");
       setErrorMsg("");
       setEmail("");
       setPassword("");
     } catch (error) {
       console.error(error);
-      setErrorMsg(error.response?.data?.message || "❌ Login failed!");
+      setErrorMsg(error.response?.data?.message || " Login failed!");
       setSuccess("");
     }
   };

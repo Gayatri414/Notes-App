@@ -4,7 +4,7 @@ import middleware from "../middleware/middleware.js";
 
 const router = express.Router();
 
-// ✅ Get all notes for logged-in user
+// Get all notes for logged-in user
 router.get("/", middleware, async (req, res) => {
   try {
     const notes = await Note.find({ userId: req.user._id });
@@ -15,7 +15,7 @@ router.get("/", middleware, async (req, res) => {
   }
 });
 
-// ✅ Add a new note
+//  Add a new note
 router.post("/add", middleware, async (req, res) => {
   try {
     const { title, description } = req.body;
@@ -32,7 +32,7 @@ router.post("/add", middleware, async (req, res) => {
   }
 });
 
-// ✅ Update an existing note
+// Update an existing note
 router.put("/:id", middleware, async (req, res) => {
   try {
     const { id } = req.params;
@@ -56,11 +56,10 @@ router.put("/:id", middleware, async (req, res) => {
   }
 });
 
-/// --- Add this block to your router file (e.g., noteRoutes.js) ---
 
-// ----------------------
+
 // Delete an existing note
-// ----------------------
+
 router.delete("/:id", middleware, async (req, res) => {
     try {
         const { id } = req.params;
