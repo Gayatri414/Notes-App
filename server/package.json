@@ -1,9 +1,10 @@
 {
-  "name": "your-project-name",
+  "name": "notes-backend",
   "version": "1.0.0",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
+    "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
   "dependencies": {
@@ -13,8 +14,5 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^9.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.11"
   }
 }
